@@ -18,8 +18,6 @@ function checksExistsRepository(request, response, next) {
     return response.status(404).json({ error: 'Repository not found' })
   }
 
-  request.user = userFound;
-
   return next();
 }
 
@@ -52,10 +50,8 @@ app.put("/repositories/:id", checksExistsRepository, (request, response) => {
   }
 
   const updatedRepository = { title, url, techs }
-  console.log(updatedRepository)
-  updatedRepository.likes = repositories[repositoryIndex].likes
 
-  repositoryIndex = repositories.findindex(repository => repository.id === id);
+  repositoryIndex = repositories.findIndex(repository => repository.id === id);
 
   if (repositoryIndex < 0) {
     return response.status(404).json({ error: "Repository not found" });
